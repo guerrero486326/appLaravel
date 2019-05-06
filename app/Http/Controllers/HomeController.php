@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //return view('categoria.index',['name'=>$variable]);
+        //return view('categoria.index', compact('variable', 'variable'));
+        //return view('categoria.index')->with('nombre',$nombre);
         return view('home');
     }
 }

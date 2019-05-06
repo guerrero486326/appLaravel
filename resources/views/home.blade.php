@@ -21,3 +21,7 @@
     </div>
 </div>
 @endsection
+
+@yield('contenido') sirve como padre de los @section() que deben contener el nombre del @yield()
+
+@section('contenido') sive como de un @yield() se debe llamar igual @yield()

@@ -13,12 +13,14 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //aqui se registran los middlewares de forma global
     protected $middleware = [
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+        //\App\Http\Middleware\Capa1::class,//se ejecuta para cualquier peticion
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //aqui se registran los middlewares para que se ejecuten en grupos aqui se agrega el listado de middlewares y en la ruta se coloca el nombre en la ruta
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
@@ -50,6 +53,7 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    // aqui se asigna un middleware para que se ejecute en determinadas rutas
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
@@ -60,6 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'name' => \App\Http\Middleware\Capa1::class,
     ];
 
     /**
