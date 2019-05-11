@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\StoreCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +16,10 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        echo 'hola mundo';
+        $categories = Category::orderBy('name', 'asc')->get();
+        //$categories = Category::orderBy('name', 'asc')->pagination(10);
+
+        return view('categorias.index',compact('categories'));
     }
 
     /**
@@ -25,6 +30,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return view('categorias.create');
     }
 
     /**
@@ -33,9 +39,40 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|unique:categories',
+            'image' => 'required|image'
+        ]);
+
+        $image = $request->file('image');
+
+        $file = $image->store('images');
+
+        $category = new Category;
+        $category->name = $request->get('name');
+        $category->image = $file;
+        $category->user_id = '1';
+        $category->save();
+
+        return redirect()->route('categories.show',['category' => $category->id]);
+    }*/
+
+    public function store(StoreCategory $request)
+    {
+
+        $image = $request->file('image');
+
+        $file = $image->store('images');
+
+        $category = new Category;
+        $category->name = $request->get('name');
+        $category->image = $file;
+        $category->user_id = '1';
+        $category->save();
+
+        return redirect()->route('categories.show',['category' => $category->id]);
     }
 
     /**
@@ -47,6 +84,8 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+        $category = Category::find($id);
+        return view('categorias.show',compact('category'));
     }
 
     /**
