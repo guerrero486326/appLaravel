@@ -16,9 +16,9 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('image');
+            //$table->string('image');
             $table->timestamps();
-            $table->unsignedInteger('user_id');///le indica a laravel que es una llave foranea
+            //$table->unsignedInteger('user_id');///le indica a laravel que es una llave foranea
         });
     }
 

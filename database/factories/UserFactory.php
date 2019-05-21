@@ -24,3 +24,14 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(\App\Movement::class, function (Faker $faker) {
+	return [
+		'type' => $faker->randomElement(['Egreso','Ingreso']),
+		'movement_date' => $faker->date(),
+		'category_id' => $faker->numberBetween(1,12),
+		'description' => $faker->paragraph(),
+		'money' => $faker->numberBetween(1000,9900000),
+		'image' => 'http://lorempixel.com/852/480'
+	];
+});
