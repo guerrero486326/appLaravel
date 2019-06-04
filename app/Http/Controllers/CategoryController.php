@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function getCategories(Request $request){
+        if($request->isJson()){
+            $categories = Category::orderBy('name', 'asc')->get();
+            return response()->json($categories, 200);
+        }
+
+        return response()->json(['error' => 'Unauthorized'], 401, []);
+    }
     /**
      * Display a listing of the resource.
      *
